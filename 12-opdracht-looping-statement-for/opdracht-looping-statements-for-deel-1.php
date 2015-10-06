@@ -1,11 +1,7 @@
 <?php
 
-	$shoppinglist		=	array(	"Eggs",
-									"Bread",
-									"Carrots",
-									"Milk");
-
-	$shoppingCounter	=	0;
+	$rows			=	10;
+	$columns		=	10;
 
 ?>
 
@@ -13,21 +9,31 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>11 | Oplossing looping statement while</title>
+		<title>12 | Oplossing looping statement for</title>
 	</head>
 	<body>
 
-		<p>Shoppinglist contains:</p>
-		<ul>
+		<table>
 
-			<?php while ( isset($shoppinglist[$shoppingCounter]) ): ?>
+			<?php for ($row = 0; $row < $rows; $row++) : ?>
 			
-				<li><?php echo ($shoppinglist[$shoppingCounter]) ?></li>
-				<?php $shoppingCounter++ ?>
+				<tr>
+					
+					<?php for ($column = 0; $column < $columns; $column++) : ?>
 
-			 <?php endwhile ?>
+						<td>
+							
+							column
 
-		</ul>
+						</td>
+
+					<?php endfor ?>
+
+				</tr>
+
+			<?php endfor ?>
+
+		</table>
 
 	</body>
 </html>
