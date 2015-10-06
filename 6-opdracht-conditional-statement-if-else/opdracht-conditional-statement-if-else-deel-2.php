@@ -1,12 +1,12 @@
 <?php
-
-	$year				= 365 * $day;
-	$month				= 31 * $day;
-	$week				= 7 * $day;
-	$day				= 24 * $hour;
-	$hour				= 60 * $minute;
-	$minute				= 60 * $seconde;
+	
 	$seconde			= 221108522;
+	$minute				= 60 * $seconde;
+	$hour				= 60 * $minute;
+	$day				= 24 * $hour;
+	$week				= 7 * $day;
+	$month				= 31 * $day;
+	$year				= 365 * $day;
 
 	$numberOfYears		= null; 
     $numberOfMonths     = null;    
