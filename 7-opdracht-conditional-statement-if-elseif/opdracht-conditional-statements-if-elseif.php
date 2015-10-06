@@ -2,6 +2,7 @@
 
 	$TheNumber			= 34;
 	$TheAnswer			= null;
+	$TheReverseAnswer	= null;
 
 
 	if ($TheNumber <= 10)
@@ -49,19 +50,22 @@
 		$TheAnswer = "You are cheating and gave a number that's not between 1 and 100.";
 	}
 
+	$TheReverseAnswer	= strrev($TheAnswer);
+
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>6 | Oplossing conditional statement if else</title>
+		<title>7 | Oplossing conditional statement if elseif</title>
 	</head>
 	<body>
 
 		<h1><?php echo $TheNumber ?></h1>
 		
 		<p><?php echo $TheAnswer ?></p>
+		<p><?php echo $TheReverseAnswer ?></p>
 		
 
 	</body>
