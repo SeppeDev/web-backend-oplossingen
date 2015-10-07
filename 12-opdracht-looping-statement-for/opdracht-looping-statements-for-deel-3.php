@@ -1,8 +1,23 @@
 <?php
 
-	$rows			=	11;
-	$columns		=	11;
+	$rows			=	10;
+	$columns		=	10;
 	$className		=	"even";
+
+	$row			=	array();
+
+
+	for ( $rowCounter=0; $rowCounter <= $rows; $rowCounter++ )
+	{ 
+		$column 	=	array();
+
+		for ( $columnCounter=0; $columnCounter <= $columns; $columnCounter++ )
+		{ 
+			$column[] = ( $columnCounter * $rowCounter );
+		}
+
+		$row[$rowCounter] = $column;
+	}
 
 ?>
 
@@ -25,36 +40,36 @@
 
 		<table>
 
-			<?php for ($row = 0; $row < $rows; $row++) : ?>
+			<?php foreach ($row as $column) : ?>
 			
 				<tr>
 					
-					<?php for ($column = 0; $column < $columns; $column++) : ?>
+					<?php foreach ($column as $result) : ?>
 
 						<?php
 
-						if ( ( $row * $column ) % 2 != 0 )
-						{
-							$className = "uneven";
-						}
-						else
-						{
-							$className = "even";
-						}
+							if ( $result % 2 != 0 )
+							{
+								$className = "uneven";
+							}
+							else
+							{
+								$className = "even";
+							}
 
 						?>
 
 						<td class = <?php echo ( $className ) ?> >
 							
-							<?php echo ($column * $row) ?>
+							<?php echo ($result) ?>
 
 						</td>
 
-					<?php endfor ?>
+					<?php endforeach ?>
 
 				</tr>
 
-			<?php endfor ?>
+			<?php endforeach ?>
 
 		</table>
 
