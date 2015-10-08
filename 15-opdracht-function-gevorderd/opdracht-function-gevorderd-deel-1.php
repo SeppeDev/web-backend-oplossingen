@@ -1,68 +1,41 @@
 <?php
 
-	$animals					=	array(	"Dog",
-											"Cat",
-											"Wolf");
+	$md5HashKey					=	"d1fa402db91a7a93c4f414b8278ce073";
 
-	$htmlString =   '<html><head><title>Dit is een test</title></head><body>Tekst</body></html>';
-
-
-	function printArray( $array )
+	function CalculatePercentage1( $hashkey, $character )
 	{
-		
-		$toPrint				=	array();
 
-		foreach ($array as $key => $animal)
-		{
-			$toPrint[] = "animals[" . $key . "] has value " . $animal;
-		}
+		$hashLength				=	strlen( $hashkey );
 
-		return $toPrint;
+		$counter = substr_count( $hashkey, $character );
+		$percentage = ( $counter / $hashLength ) * 100;
+
+		return $percentage;
 
 	}
 
-
-	function validateHtmlTag( $html )
+	function CalculatePercentage2( $character )
 	{
 
-		$openingTag				=	"<html>";
-		$closingTag				=	"</html>";
-		$isHtmlValid			=	false;
+		global $md5HashKey;
+		$hashLength				=	strlen( $md5HashKey );
 
-		if ( strpos( $html, $openingTag ) === 0 )
-		{
-			
-			if ( strpos( $html, $closingTag ) === ( strlen( $html ) - strlen( $closingTag ) ) )
-			{
-				$isHtmlValid = true;
-			}
+		$counter = substr_count( $md5HashKey, $character );
+		$percentage = ( $counter / $hashLength ) * 100;
 
-		}
-
-		return isHtmlValidToTekst( $isHtmlValid );
+		return $percentage;
 
 	}
 
-
-	function isHtmlValidToTekst( $isHtmlValid )
+	function CalculatePercentage3( $character )
 	{
-		
-		$answer					=	null;
 
-		if ( $isHtmlValid )
-		{
-			
-			$answer = "a valid";
+		$hashLength				=	strlen( $GLOBALS["md5HashKey"] );
 
-		}
-		else
-		{
+		$counter = substr_count( $GLOBALS["md5HashKey"], $character );
+		$percentage = ( $counter / $hashLength ) * 100;
 
-			$answer = "an invalid";
-
-		}
-
-		return $answer;
+		return $percentage;
 
 	}
 
@@ -73,18 +46,14 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>13 | Oplossing looping statement foreach</title>
+		<title>15 | Oplossing function gevorderd</title>
 
 	</head>
 	<body>
 
-		<?php foreach ( printArray( $animals ) as $value ) : ?>
-
-			<p><?php echo ( $value ) ?></p>
-
-		<?php endforeach ?>
-
-		<p>The string has <?php echo ( validateHtmlTag( $htmlString ) ) ?> htmltag.</p>
+		<p>The character 2 accounts for <?php echo ( calculatePercentage1( $md5HashKey, "2" ) ) ?>% of the string.</p>
+		<p>The character 8 accounts for <?php echo ( calculatePercentage2( "8" ) ) ?>% of the string.</p>
+		<p>The character a accounts for <?php echo ( calculatePercentage3( "a" ) ) ?>% of the string.</p>
 
 	</body>
 </html>

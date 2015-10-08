@@ -1,18 +1,18 @@
 <?php
 
-	function calculateSum( $number1, $number2 )
+	function CalculateSum( $number1, $number2 )
 	{
 		$sum = $number1 + $number2;
 		return $sum;
 	}
 
-	function multiply( $number1, $number2 )
+	function Multiply( $number1, $number2 )
 	{
 		$result = $number1 * $number2;
 		return $result;
 	}
 
-	function isEven( $number1 )
+	function IsEven( $number1 )
 	{
 		if ( $number1 % 2 == 0 )
 		{
@@ -31,7 +31,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>13 | Oplossing looping statement foreach</title>
+		<title>14 | Oplossing function</title>
 
 	</head>
 	<body>

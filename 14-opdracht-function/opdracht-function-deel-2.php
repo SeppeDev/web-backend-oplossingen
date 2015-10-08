@@ -7,7 +7,7 @@
 	$htmlString =   '<html><head><title>Dit is een test</title></head><body>Tekst</body></html>';
 
 
-	function printArray( $array )
+	function PrintArray( $array )
 	{
 		
 		$toPrint				=	array();
@@ -22,7 +22,7 @@
 	}
 
 
-	function validateHtmlTag( $html )
+	function ValidateHtmlTag( $html )
 	{
 
 		$openingTag				=	"<html>";
@@ -44,7 +44,7 @@
 	}
 
 
-	function isHtmlValidToTekst( $isHtmlValid )
+	function IsHtmlValidToTekst( $isHtmlValid )
 	{
 		
 		$answer					=	null;
@@ -73,7 +73,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>13 | Oplossing looping statement foreach</title>
+		<title>14 | Oplossing function</title>
 
 	</head>
 	<body>
