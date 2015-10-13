@@ -56,7 +56,7 @@
 
 			<p>
 
-				- €<?php echo ( $year ) ?>
+				-> €<?php echo ( $year ) ?>
 
 			</p>
 
