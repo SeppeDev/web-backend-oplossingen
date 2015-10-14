@@ -47,15 +47,15 @@
 
 								);
 	
-	if( isset( $_GET["id"] ) )
+	if( isset( $_GET["key"] ) )
 	{
 
-		$id = $_GET["id"];
+		$key = $_GET["key"];
 
-		if( array_key_exists( $id, $articles ) )
+		if( array_key_exists( $key, $articles ) )
 		{
 
-			$articles = array( $articles[$id] );
+			$articles = array( $articles[$key] );
 			$showOneArticle = true;
 
 		}
@@ -71,12 +71,11 @@
 		<meta charset="utf-8">
 
 		<?php if( $showOneArticle ) : ?>
-			<title>17 | Oplossing GET | Article - <?php echo( $articles[$id]["title"] ) ?></title>
+			<title>17 | Oplossing GET | Article - <?php echo( $articles[0]["title"] ) ?></title>
 		<?php else : ?>
 			<title>17 | Oplossing GET</title>
 		<?php endif ?>
 
-		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	</head>
@@ -84,37 +83,41 @@
 
 		<h1>Het boeiendste nieuws ooit, hier voor u verzameld</h1>
 
-		<?php foreach( $articles as $key => $article ) : ?>
+		<div class="container">
 
-			<article>
-				
-				<h2>
-					<?php echo( $article["title"] ) ?>
-				</h2>
+			<?php foreach( $articles as $key => $article ) : ?>
 
-				<img src="css/images/<?php echo( $article['image'] ) ?>" alt="<?php echo ( $article['imageDescr'] ) ?>">
-
-				<p id="date">
-					<?php echo( $article["date"] ) ?>
-				</p>
+				<article class="<?php echo( $showOneArticle ) ? 'singe' : 'multiple' ; ?>">
 					
-				<p id="content">
+					<h2>
+						<?php echo( $article["title"] ) ?>
+					</h2>
 
-					<?php if( $showOneArticle ) : ?>
-						<?php echo( $article["content"] ) ?>
-					<?php else : ?>
-						<?php substr( $article["content"], 0, 50 ) ?>
+					<img src="css/images/<?php echo( $article['image'] ) ?>" alt="<?php echo ( $article['imageDescr'] ) ?>">
+
+					<p class="date">
+						<?php echo( $article["date"] ) ?>
+					</p>
+						
+					<p class="content">
+
+						<?php if( $showOneArticle ) : ?>
+							<?php echo( $article["content"] ) ?>
+						<?php else : ?>
+							<?php echo( substr( $article["content"], 0, 50 ) ) ?>
+						<?php endif ?>
+
+					</p>
+
+					<?php if( !$showOneArticle ) : ?>
+						<a href="opdracht-get.php?key=<?php echo( $key ) ?>">Lees meer</a>
 					<?php endif ?>
 
-				</p>
+				</article>
 
-				<?php if( !$showOneArticle ) : ?>
-					<a href="opdracht-get.php?key=<?php echo( $key ) ?>">Lees meer</a>
-				<?php endif ?>
+			<?php endforeach ?>
 
-			</article>
-
-		<?php endforeach ?>
+		</div>
 		
 	</body>
 </html>

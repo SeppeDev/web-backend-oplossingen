@@ -8,14 +8,14 @@ body
 {
 	width:	1024px;
 	margin:	0 auto;
-		}
+}
 
 img
 {
 	max-width: 100%;
 }
 
-article
+.multiple
 {
 	float:left;
 	width:288px;
