@@ -1,0 +1,28 @@
+.modal
+{
+	padding			:	6px;
+	border-radius	:	3px;
+}
+
+.success
+{
+	background-color:lightgreen;
+}
+
+.error
+{
+	background-color:red;
+}
+
+.even
+{
+	background-color:lightgrey;
+}
+
+.delete-button
+{
+	background-color	:	transparent;
+	border				:	none;
+	padding				:	0px;
+	cursor				:	pointer;
+}
