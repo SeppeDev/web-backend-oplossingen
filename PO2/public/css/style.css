@@ -1,0 +1,84 @@
+body
+{
+	font-family					:	Helvetica, Arial, sans-serif;
+	font-size 					:	15px;
+	padding 					:	20px 0px;
+	background					:	#E1E1E1;
+
+}
+
+.container
+{
+	
+}
+
+/****************************Tables****************************/
+.tableHeading
+{
+
+}
+
+.todoTable
+{
+
+	background-color			:	#FF3333;
+
+}
+
+.doneTable
+{
+
+	background-color			:	#B3FF99;
+
+}
+
+.notAList
+{
+	font-weight: bold;
+	font-size: 25px;
+}
+
+/**************************CheckBoxes**************************/
+.checkBoxes
+{
+
+	width						:	20px;
+	height						:	20px;
+
+}
+
+.notDoneCheckBox
+{
+
+	width						:	20px;
+	height						:	20px;
+	display						:	block;
+	background 					:	transparent url( "images/checkbox-unchecked.png" ) center top no-repeat;
+	background-size 			:	20px 20px;
+
+}
+
+.doneCheckBox
+{
+
+	width						:	20px;
+	height						:	20px;
+	display						:	block;
+	background 					:	transparent url( "images/checkbox-checked.png" ) center top no-repeat;
+	background-size 			:	20px 20px;
+
+}
+
+.notDoneCheckBox:hover
+{
+
+	background-image			:	url( "images/checkbox-checked.png" );
+
+}
+
+.doneCheckBox:hover
+{
+
+	background-image 			:	url( "images/checkbox-unchecked.png" );
+	
+}

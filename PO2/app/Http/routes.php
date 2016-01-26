@@ -11,13 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', function () {
-    return view('home');
-});
 
 // Authentication Routes...
 
@@ -36,9 +30,25 @@ Route::get('/home', function () {
 Route::group(['middleware' => ['web']], function () {
 
 	Route::auth();
+
+
+	Route::get('/', function () {
+    								return view('welcome');
+									});
+	Route::get('/home', function () {
+	    							return view('home');
+									})->middleware( "auth" );
+
     
 	Route::get('/todos', 'TodoController@index');
 	Route::post('/todo', 'TodoController@store');
+	Route::get('/todos/{todo}', 'TodoController@update');
 	Route::delete('/todo/{todo}', 'TodoController@destroy');
+
+
+	Route::get('/todolists', 'TodolistController@index');
+	Route::post('/todolist', 'TodolistController@store');
+	Route::get('/todolists/{todolist}', 'TodoController@indexList');
+	Route::delete('/todolist/{todolist}', 'TodolistController@destroy');
 
 });

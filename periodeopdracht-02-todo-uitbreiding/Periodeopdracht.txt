@@ -1,0 +1,6 @@
+De Periodeopdracht zit in de map PO2. De naam van de map kon niet langer zijn in verband met pathlength.
+
+PO2 is de periodetaak met nog een (niet volledig functionele) optie om todo-lijsten toe te voegen met todo's specifiek in lijsten geplaatst.
+De gecreeërde todo's worden nog niet gelinkt aan de overeenkomstige lijst.
+
+In de taakbalk vanboven is de "TODO" echter gewoon de gevraagde taak.

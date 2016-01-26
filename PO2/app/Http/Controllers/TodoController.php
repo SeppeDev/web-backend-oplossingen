@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Todo;
+use App\Todolist;
 use App\Repositories\TodoRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,18 @@ class TodoController extends Controller
 	{
 
 		return view(	"todos.index",
-						[ "todos" => $this->todos->forUser( $request->user() ),
+						[ "todos" => $this->todos->todoForUser( $request->user() ),
+						  "dones" => $this->todos->doneForUser( $request->user() ),
+						] );
+
+	}
+
+	public function indexList( Request $request, Todolist $todolist )
+	{
+
+		return view(	"todos.index",
+						[ "todos" => $this->todos->todoForList( $request->user(), $todolist ),
+						  "dones" => $this->todos->doneForList( $request->user(), $todolist ),
 						] );
 
 	}
@@ -56,10 +68,34 @@ class TodoController extends Controller
 	}
 
 
+	public function update( Request $request, Todo $todo )
+	{
+
+		$this->authorize( "destroy", $todo );
+
+		$todo->done = !($todo->done);
+		$todo->save();
+
+		return redirect( "/todos" );
+
+	}
+
+
 	public function destroy( Request $request, Todo $todo )
 	{
 
 		$this->authorize( "destroy", $todo );
+
+		$todo->delete();
+
+		return redirect( "/todos" );
+
+	}
+
+	public function destroyFromList( Request $request, Todo $todo )
+	{
+
+		$this->authorize( "destroyFromList", $todo );
 
 		$todo->delete();
 

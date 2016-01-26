@@ -3,10 +3,11 @@
 namespace App\Policies;
 
 use App\User;
+use App\Todolist;
 use App\Todo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TodoPolicy
+class TodolistPolicy
 {
     use HandlesAuthorization;
 
@@ -23,17 +24,10 @@ class TodoPolicy
 
 
 
-    public function destroy( User $user, Todo $todo )
+    public function destroy( User $user, Todolist $todolist )
     {
 
-        return $user->id === $todo->user_id;
-
-    }
-
-    public function destroyFromList( Todolist $todolist, Todo $todo )
-    {
-
-        return $todolist->user_id === $todo->user_id;
+        return $user->id === $todolist->user_id;
 
     }
 }

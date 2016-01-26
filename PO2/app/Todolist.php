@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Model
+class Todolist extends Model
 {
-    /**
+    
+	/**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -26,7 +27,7 @@ class Todo extends Model
 
 
     /**
-    *   Getting the todos user
+    *   Getting the todolists user
     */
     public function user()
     {
@@ -35,14 +36,11 @@ class Todo extends Model
 
     }
 
-
-    /**
-    *   Getting the todos todolist
-    */
-    public function todolist()
+    public function todos()
     {
 
-        return $this->belongsTo( User::class );
+        return $this->hasMany( Todo::class );
 
     }
+
 }

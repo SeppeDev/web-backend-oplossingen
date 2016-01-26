@@ -43,22 +43,21 @@
                     Current todos
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body todoTable">
                     <table class="table table-striped todo-table">
-
-                        <!-- Table Headings -->
-                        <thead>
-                            <th>Todo</th>
-                            <th>&nbsp;</th>
-                        </thead>
 
                         <!-- Table Body -->
                         <tbody>
                             @foreach ($todos as $todo)
                                 <tr>
+                                    <!-- Todo Done -->
+                                    <td class="table-text">
+                                        <a href="{{ url('todos/'.$todo->id) }}" class="notDoneCheckBox"></a>
+                                    </td>
+
                                     <!-- Todo Name -->
                                     <td class="table-text">
-                                        <div>{{ $todo->name }}</div>
+                                        <div class="notDoneText">{{ $todo->name }}</div>
                                     </td>
 
                                     <!-- Delete Button -->
@@ -67,7 +66,7 @@
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}
 
-                                            <button>Delete Todo</button>
+                                            <button>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -76,9 +75,70 @@
                     </table>
                 </div>
             </div>
+        @elseif ( count( $dones ) == 0 && count( $todos ) == 0 )
+
+        @else
+            <div class="notAList">
+                <p>
+                    There you go, that's it, all done!
+                </p>
+            </div>
         @endif
 
     </div>
 
-    <!-- TODO: Current Todos -->
+    <div class="panel-body">
+        
+        <!-- Current Todos -->
+        @if (count($dones) > 0)
+            <div class="panel panel-default">
+                <div class="panel-heading tableHeading">
+                    Done
+                </div>
+
+                <div class="panel-body doneTable">
+                    <table class="table table-striped todo-table">
+
+                        <!-- Table Body -->
+                        <tbody>
+                            @foreach ($dones as $todo)
+                                <tr>
+                                    <!-- Todo Done -->
+                                    <td class="table-text">
+                                        <a href="{{ url('todos/'.$todo->id) }}" class="doneCheckBox"></a>
+                                    </td>
+
+                                    <!-- Todo Name -->
+                                    <td class="table-text">
+                                        <div class="doneText">{{ $todo->name }}</div>
+                                    </td>
+
+                                    <!-- Delete Button -->
+                                    <td>
+                                        <form action="{{ url('todo/'.$todo->id) }}" method="POST">
+                                            {!! csrf_field() !!}
+                                            {!! method_field('DELETE') !!}
+
+                                            <button>Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @elseif ( count( $dones ) == 0 && count( $todos ) == 0 )
+
+        @else
+            <div class="notAList">
+                <p>
+                    Damn man, need to step it up!!!
+                </p>
+            </div>
+        @endif
+
+    </div>
+
+    
 @endsection
