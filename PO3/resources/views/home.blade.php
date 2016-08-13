@@ -8,7 +8,6 @@
                 <div class="panel-heading">Articles Overview</div>
 
                 <div class="panel-content">
-                    You are logged in!
 
                     <ul class="article-overview">
                         @foreach ($articles as $article)
@@ -17,17 +16,39 @@
                                 <div class="vote">
 
                                     @if (Auth::check())
+                                        
+                                        <?php $canVote = true ?>
+                                        
+                                        @foreach($votes as $vote)
 
-                                        <form action="{{ url('/vote/up/'.$article->id) }}" method="POST" class="form-inline upvote">
-                                            {!! csrf_field() !!}
+                                            @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == true)
 
-                                            <button>
+                                                <div class="form-inline upvote">
 
-                                                <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+                                                    <i class="fa fa-btn fa-caret-up disabled upvote" title="You can only upvote once"></i>
 
-                                            </button>
+                                                </div>
 
-                                        </form>
+                                                <?php $canVote = false ?>
+
+                                            @endif
+
+                                        @endforeach
+
+                                        @if($canVote)
+
+                                            <form action="{{ url('/vote/up/'.$article->id) }}" method="POST" class="form-inline upvote">
+                                                {!! csrf_field() !!}
+
+                                                <button>
+
+                                                    <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+
+                                                </button>
+
+                                            </form>
+
+                                        @endif
 
                                     @else
 
@@ -41,16 +62,38 @@
 
                                     @if (Auth::check())
 
-                                        <form action="{{ url('/vote/down/'.$article->id) }}" method="POST" class="form-inline downvote">
-                                            {!! csrf_field() !!}
+                                        <?php $canVote = true ?>
+                                        
+                                        @foreach($votes as $vote)
 
-                                            <button>
+                                            @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == false)
 
-                                                <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+                                                <div class="form-inline downvote">
 
-                                            </button>
+                                                    <i class="fa fa-btn fa-caret-down disabled downvote" title="You can only downvote once"></i>
 
-                                        </form>
+                                                </div>
+
+                                                <?php $canVote = false ?>
+                                                
+                                            @endif
+
+                                        @endforeach
+
+                                        @if($canVote)
+
+                                            <form action="{{ url('/vote/down/'.$article->id) }}" method="POST" class="form-inline downvote">
+                                                {!! csrf_field() !!}
+
+                                                <button>
+
+                                                    <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+
+                                                </button>
+
+                                            </form>
+
+                                        @endif
 
                                     @else
 
@@ -71,8 +114,40 @@
                                 </div>
 
                                 <div class="info">
+                                
+                                    <?php
+                                        $points = 0;
+                                        foreach ($votes as $vote)
+                                        {
+                                            if ($vote->article_id == $article->id)
+                                            {
+                                                if ($vote->vote == true)
+                                                {
+                                                    $points = $points + 1;
+                                                }
+                                                else
+                                                {
+                                                    $points = $points - 1;
+                                                }
+                                            }
+                                        }
+                                        echo $points;
+                                    ?>
 
-                                    {{$article->points}} | {{$article->user_id}} | <a href="{{ url('/comments/'.$article->id) }}">{{$article->comments}} comments</a>
+                                     | 
+
+                                     @foreach ($users as $user)
+                                        @if ($user->id == $article->user_id)
+                                            {{$user->name}}
+                                        @endif
+                                     @endforeach
+
+                                     |
+
+                                     <a href="{{ url('/comments/'.$article->id) }}">   
+                                        {{$comments->where('article_id', $article->id)->count()}}
+
+                                     comments</a>
 
                                 </div>
 

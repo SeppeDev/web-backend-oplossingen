@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Article;
+use App\Vote;
 
-class ArticleRepository
+class VoteRepository
 {
     /**
-     * Get all of the articles
+     * Get all of the votes
      *
      * @return Collection
      */
     public function all()
     {
-        return Article::orderBy('created_at', 'asc')
+        return Vote::orderBy('article_id', 'asc')
                         ->get();
     }
 }
