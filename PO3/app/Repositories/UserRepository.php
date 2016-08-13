@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Article;
+use App\User;
 
-class ArticleRepository
+class UserRepository
 {
     /**
-     * Get all of the articles
+     * Get all of the users
      *
      * @return Collection
      */
     public function all()
     {
-        return Article::orderBy('created_at', 'asc')
+        return User::orderBy('id', 'asc')
                         ->get();
     }
 }

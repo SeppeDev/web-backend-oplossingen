@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Article;
+use App\Comment;
 
-class ArticleRepository
+class CommentRepository
 {
     /**
-     * Get all of the articles
+     * Get all of the comments
      *
      * @return Collection
      */
     public function all()
     {
-        return Article::orderBy('created_at', 'asc')
+        return Comment::orderBy('created_at', 'asc')
                         ->get();
     }
 }
