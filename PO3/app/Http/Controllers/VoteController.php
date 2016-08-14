@@ -23,7 +23,7 @@ class VoteController extends Controller
 	    		'vote' => true
 	    	]);
 
-		return redirect( "/" );
+		return redirect()->back()->with("success", "You have upvoted '$article->title'");
 	}
 
 	/*Downvote*/
@@ -38,6 +38,6 @@ class VoteController extends Controller
 	    		'vote' => false
 	    	]);
 
-		return redirect( "/" );
+		return redirect()->back()->with("success", "You have downvoted '$article->title'");
 	}
 }

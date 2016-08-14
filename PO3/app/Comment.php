@@ -11,7 +11,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = ['content'];
+    protected $fillable = ['content', 'article_id'];
 
     /*Get the user that owns the vote.*/
     public function user()

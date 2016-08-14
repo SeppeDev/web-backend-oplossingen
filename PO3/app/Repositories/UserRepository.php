@@ -16,4 +16,12 @@ class UserRepository
         return User::orderBy('id', 'asc')
                         ->get();
     }
+
+    public function userById( $user_id )
+    {
+
+        return User::where( 'id', $user_id )
+                    ->get();
+
+    }
 }

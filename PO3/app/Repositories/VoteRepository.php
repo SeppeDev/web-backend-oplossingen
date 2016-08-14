@@ -16,4 +16,12 @@ class VoteRepository
         return Vote::orderBy('article_id', 'asc')
                         ->get();
     }
+
+    public function votesById( $article_id )
+    {
+
+        return Vote::where( 'article_id', $article_id )
+                    ->get();
+
+    }
 }

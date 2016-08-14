@@ -16,4 +16,12 @@ class ArticleRepository
         return Article::orderBy('created_at', 'asc')
                         ->get();
     }
+
+    /*public function articleById( $article_id )
+    {
+
+        return Article::where( 'id', $article_id )
+                    ->get();
+
+    }*/
 }
