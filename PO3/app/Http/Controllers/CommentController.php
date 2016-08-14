@@ -11,8 +11,8 @@ use App\Repositories\ArticleRepository;
 use App\Repositories\VoteRepository;
 use App\Repositories\CommentRepository;
 
-class HomeController extends Controller
-{ 
+class CommentController extends Controller
+{
     protected $users;
     protected $articles;
     protected $votes;
@@ -26,19 +26,24 @@ class HomeController extends Controller
         $this->comments = $comments;
     }
 
-    /**
-     * Display a list of all of the articles.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function index(Request $request)
+    public function index(Request $request, Article $article)
     {
-        return view('home', [
+        return view('comments/index', [
             'users' => $this->users->all(),
-            'articles' => $this->articles->all(),
-            'votes' => $this->votes->all(),
-            'comments' => $this->comments->all()
+            'article' => $article,
+            'votes' => $this->votes->votesById($article->id),
+            'comments' => $this->comments->commentsById($article->id)
         ]);
     }
+
+    public function store( Request $request )
+	{
+
+		$request->user()->comments()->create( [	"content" => $request->content,
+												"article_id" => $request->article_id
+												] );
+
+		return redirect()->back()->with("success", "Comment added succesfully.");
+
+	}
 }

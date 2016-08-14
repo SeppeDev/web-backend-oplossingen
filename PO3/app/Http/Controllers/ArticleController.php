@@ -33,6 +33,6 @@ class ArticleController extends Controller
 	    										'url' => $request->url,
 	    										]);
 
-	    return redirect('/');
+	    return redirect('/')->with("success", "Article '$request->title' created succesfully");
 	}
 }

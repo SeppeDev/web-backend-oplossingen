@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+
+            <!-- Display Validation Errors -->
+            @include('common.errors')
+            @include('common.success')
+        
             <div class="panel panel-default">
                 <div class="panel-heading">Articles Overview</div>
 
@@ -134,7 +139,11 @@
                                         echo $points;
                                     ?>
 
-                                     | 
+                                    points
+
+                                    |
+
+                                    posted by
 
                                      @foreach ($users as $user)
                                         @if ($user->id == $article->user_id)
@@ -142,7 +151,7 @@
                                         @endif
                                      @endforeach
 
-                                     |
+                                    |
 
                                      <a href="{{ url('/comments/'.$article->id) }}">   
                                         {{$comments->where('article_id', $article->id)->count()}}

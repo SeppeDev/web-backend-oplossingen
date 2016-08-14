@@ -22,3 +22,6 @@ Route::delete('/article/{article}', 'ArticleController@destroy');
 
 Route::post('/vote/up/{article}', 'VoteController@up');
 Route::post('/vote/down/{article}', 'VoteController@down');
+
+Route::get('/comments/{article}', 'CommentController@index');
+Route::post('/comments/add', 'CommentController@store');
