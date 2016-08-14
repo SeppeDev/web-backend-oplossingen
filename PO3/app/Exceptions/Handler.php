@@ -43,8 +43,19 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
+
     public function render($request, Exception $e)
     {
+        if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+        {
+            return redirect()->back()->with("errors", "Page doesn't exist");
+        }
+
+        if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException)
+        {
+            return redirect()->back()->with("errors", "Article doesn't exist");
+        }
+
         return parent::render($request, $e);
     }
 }

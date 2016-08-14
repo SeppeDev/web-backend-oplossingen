@@ -23,35 +23,47 @@
                                     @if (Auth::check())
                                         
                                         <?php $canVote = true ?>
+
+                                        @if($article->user_id == Auth::user()->id)
                                         
-                                        @foreach($votes as $vote)
+                                            <div class="form-inline upvote">
 
-                                            @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == true)
+                                                <i class="fa fa-btn fa-caret-up disabled upvote" title="You cant upvote your own articles"></i>
 
-                                                <div class="form-inline upvote">
+                                            </div>
 
-                                                    <i class="fa fa-btn fa-caret-up disabled upvote" title="You can only upvote once"></i>
+                                        @else
+                                        
+                                            @foreach($votes as $vote)
 
-                                                </div>
+                                                @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == true)
 
-                                                <?php $canVote = false ?>
+                                                    <div class="form-inline upvote">
+
+                                                        <i class="fa fa-btn fa-caret-up disabled upvote" title="You can only upvote once"></i>
+
+                                                    </div>
+
+                                                    <?php $canVote = false ?>
+
+                                                @endif
+
+                                            @endforeach
+
+                                            @if($canVote)
+
+                                                <form action="{{ url('/vote/up/'.$article->id) }}" method="POST" class="form-inline upvote">
+                                                    {!! csrf_field() !!}
+
+                                                    <button>
+
+                                                        <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+
+                                                    </button>
+
+                                                </form>
 
                                             @endif
-
-                                        @endforeach
-
-                                        @if($canVote)
-
-                                            <form action="{{ url('/vote/up/'.$article->id) }}" method="POST" class="form-inline upvote">
-                                                {!! csrf_field() !!}
-
-                                                <button>
-
-                                                    <i class="fa fa-btn fa-caret-up" title="upvote"></i>
-
-                                                </button>
-
-                                            </form>
 
                                         @endif
 
@@ -68,35 +80,47 @@
                                     @if (Auth::check())
 
                                         <?php $canVote = true ?>
+
+                                        @if($article->user_id == Auth::user()->id)
                                         
-                                        @foreach($votes as $vote)
+                                            <div class="form-inline upvote">
 
-                                            @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == false)
+                                                <i class="fa fa-btn fa-caret-down disabled upvote" title="You cant downvote your own articles"></i>
 
-                                                <div class="form-inline downvote">
+                                            </div>
 
-                                                    <i class="fa fa-btn fa-caret-down disabled downvote" title="You can only downvote once"></i>
+                                        @else
+                                        
+                                            @foreach($votes as $vote)
 
-                                                </div>
+                                                @if(Auth::user()->id == $vote->user_id && $article->id == $vote->article_id && $vote->vote == false)
 
-                                                <?php $canVote = false ?>
-                                                
+                                                    <div class="form-inline downvote">
+
+                                                        <i class="fa fa-btn fa-caret-down disabled downvote" title="You can only downvote once"></i>
+
+                                                    </div>
+
+                                                    <?php $canVote = false ?>
+                                                    
+                                                @endif
+
+                                            @endforeach
+
+                                            @if($canVote)
+
+                                                <form action="{{ url('/vote/down/'.$article->id) }}" method="POST" class="form-inline downvote">
+                                                    {!! csrf_field() !!}
+
+                                                    <button>
+
+                                                        <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+
+                                                    </button>
+
+                                                </form>
+
                                             @endif
-
-                                        @endforeach
-
-                                        @if($canVote)
-
-                                            <form action="{{ url('/vote/down/'.$article->id) }}" method="POST" class="form-inline downvote">
-                                                {!! csrf_field() !!}
-
-                                                <button>
-
-                                                    <i class="fa fa-btn fa-caret-down" title="downvote"></i>
-
-                                                </button>
-
-                                            </form>
 
                                         @endif
 
