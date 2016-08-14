@@ -140,6 +140,16 @@
 
                                     <a href="{{ $article->url }}" class="urlTitle">{{ $article->title }}</a>
 
+                                    @if($article->user_id == Auth::user()->id)
+
+                                        <a href="{{ url('/article/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+
+                                        <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs">
+                                            <i class="fa fa-btn fa-trash" title="delete"></i> delete article
+                                        </a>
+
+                                    @endif
+
                                 </div>
 
                                 <div class="info">

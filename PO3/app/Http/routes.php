@@ -18,7 +18,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/article/add', 'ArticleController@index');
 Route::post('/article/add', 'ArticleController@store');
-Route::delete('/article/{article}', 'ArticleController@destroy');
+Route::delete('/article/delete/{article}', 'ArticleController@destroy');
 
 Route::post('/vote/up/{article}', 'VoteController@up');
 Route::post('/vote/down/{article}', 'VoteController@down');
