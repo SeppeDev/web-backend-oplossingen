@@ -8,6 +8,7 @@
             <!-- Bootstrap Boilerplate... -->
 
             <!-- Display Validation Errors -->
+            @include('common.delete')
             @include('common.errors')
             @include('common.success')
 
@@ -20,11 +21,15 @@
 
                 <div class="panel-heading">Article: {{$article->title}}
 
-                    @if($article->user_id == Auth::user()->id)
+                    @if (Auth::check())
 
-                        <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs pull-right">
-                            <i class="fa fa-btn fa-trash" title="delete"></i> delete article
-                        </a>
+                        @if($article->user_id == Auth::user()->id)
+
+                            <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs pull-right">
+                                <i class="fa fa-btn fa-trash" title="delete"></i> delete article
+                            </a>
+
+                        @endif
 
                     @endif
 
@@ -157,11 +162,15 @@
 
                                 <a href="{{ $article->url }}" class="urlTitle">{{ $article->title }}</a>
 
-                                @if($article->user_id == Auth::user()->id)
+                                @if (Auth::check())
+
+                                    @if($article->user_id == Auth::user()->id)
 
                                         <a href="{{ url('/article/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
 
                                     @endif
+
+                                @endif
 
                             </div>
 
@@ -228,13 +237,17 @@
 
                                                 {{$comment->updated_at}}
 
-                                                @if($comment->user_id == Auth::user()->id)
+                                                @if (Auth::check())
 
-                                                    <a href="{{ url('/article/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+                                                    @if($comment->user_id == Auth::user()->id)
 
-                                                    <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-btn fa-trash" title="delete"></i> delete
-                                                    </a>
+                                                        <a href="{{ url('/comment/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+
+                                                        <a href="{{ url('/comment/delete/'.$comment->id) }}" class="btn btn-danger btn-xs">
+                                                            <i class="fa fa-btn fa-trash" title="delete"></i> delete
+                                                        </a>
+
+                                                    @endif
 
                                                 @endif
 

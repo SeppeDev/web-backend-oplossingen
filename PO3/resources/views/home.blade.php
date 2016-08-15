@@ -6,6 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
 
             <!-- Display Validation Errors -->
+            @include('common.delete')
             @include('common.errors')
             @include('common.success')
         
@@ -140,13 +141,17 @@
 
                                     <a href="{{ $article->url }}" class="urlTitle">{{ $article->title }}</a>
 
-                                    @if($article->user_id == Auth::user()->id)
+                                    @if (Auth::check())
 
-                                        <a href="{{ url('/article/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+                                        @if($article->user_id == Auth::user()->id)
 
-                                        <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs">
-                                            <i class="fa fa-btn fa-trash" title="delete"></i> delete article
-                                        </a>
+                                            <a href="{{ url('/article/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+
+                                            <a href="{{ url('/article/delete/'.$article->id) }}" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-btn fa-trash" title="delete"></i> delete article
+                                            </a>
+
+                                        @endif
 
                                     @endif
 

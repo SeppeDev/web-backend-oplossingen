@@ -18,10 +18,13 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/article/add', 'ArticleController@index');
 Route::post('/article/add', 'ArticleController@store');
-Route::delete('/article/delete/{article}', 'ArticleController@destroy');
+Route::get('/article/delete/{article}', 'ArticleController@delete');
+Route::delete('/article/deleteNow/{article}', 'ArticleController@destroy');
 
 Route::post('/vote/up/{article}', 'VoteController@up');
 Route::post('/vote/down/{article}', 'VoteController@down');
 
 Route::get('/comments/{article}', 'CommentController@index');
 Route::post('/comments/add', 'CommentController@store');
+Route::get('/comment/delete/{comment}', 'CommentController@delete');
+Route::delete('/comment/deleteNow/{comment}', 'CommentController@destroy');
