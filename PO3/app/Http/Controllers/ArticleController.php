@@ -37,6 +37,23 @@ class ArticleController extends Controller
 	    return redirect('/')->with("success", "Article '$request->title' created succesfully");
 	}
 
+	public function update( Request $request, Article $article )
+    {
+
+        $this->authorize( "destroy", $article );
+
+        $this->validate($request, [             'title' => 'required|max:255',
+                                                'url' => 'required|active_url'
+                                                ]);
+
+        $article->title = $request->title;
+        $article->url = $request->url;
+        $article->save();
+
+        return redirect()->back()->with("success", "Article succesfully edited");
+
+    }
+
 	public function delete( Request $request, 	Article $article )
     {
 

@@ -159,24 +159,7 @@
 
                                 <div class="info">
                                 
-                                    <?php
-                                        $points = 0;
-                                        foreach ($votes as $vote)
-                                        {
-                                            if ($vote->article_id == $article->id)
-                                            {
-                                                if ($vote->vote == true)
-                                                {
-                                                    $points = $points + 1;
-                                                }
-                                                else
-                                                {
-                                                    $points = $points - 1;
-                                                }
-                                            }
-                                        }
-                                        echo $points;
-                                    ?>
+                                    {{$points[$article->id]}}
 
                                     points
 

@@ -176,21 +176,7 @@
 
                             <div class="info">
                             
-                                <?php
-                                    $points = 0;
-                                    foreach ($votes as $vote)
-                                    {
-                                        if ($vote->vote == true)
-                                        {
-                                            $points = $points + 1;
-                                        }
-                                        else
-                                        {
-                                            $points = $points - 1;
-                                        }
-                                    }
-                                    echo $points;
-                                ?>
+                                {{$points[$article->id]}}
 
                                 points
 
@@ -241,7 +227,7 @@
 
                                                     @if($comment->user_id == Auth::user()->id)
 
-                                                        <a href="{{ url('/comment/edit/'.$article->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
+                                                        <a href="{{ url('/comment/edit/'.$comment->id) }}" class ="btn btn-primary btn-xs edit-btn">edit</a>
 
                                                         <a href="{{ url('/comment/delete/'.$comment->id) }}" class="btn btn-danger btn-xs">
                                                             <i class="fa fa-btn fa-trash" title="delete"></i> delete

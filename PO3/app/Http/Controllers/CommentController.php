@@ -28,13 +28,43 @@ class CommentController extends Controller
         $this->comments = $comments;
     }
 
+    private function points()
+    {
+        $pointArray = [];
+
+        foreach ($this->articles->all() as $article)
+        {
+            $points = 0;
+
+            foreach ($this->votes->all() as $vote)
+            {
+                if ($vote->article_id == $article->id)
+                {
+                    if ($vote->vote == true)
+                    {
+                        $points = $points + 1;
+                    }
+                    else
+                    {
+                        $points = $points - 1;
+                    }
+                }
+            }
+
+            $pointArray = array_add($pointArray, $article->id, $points);
+        }
+
+        return $pointArray;
+    }
+
     public function index(Request $request, Article $article)
     {
         return view('comments/index', [
             'users' => $this->users->all(),
             'article' => $article,
             'votes' => $this->votes->votesById($article->id),
-            'comments' => $this->comments->commentsById($article->id)
+            'comments' => $this->comments->commentsById($article->id),
+            'points' => $this->points()
         ]);
     }
 
@@ -48,6 +78,18 @@ class CommentController extends Controller
 		return redirect()->back()->with("success", "Comment added succesfully.");
 
 	}
+
+    public function update( Request $request, Comment $comment )
+    {
+
+        $this->authorize( "destroy", $comment );
+
+        $comment->content = $request->content;
+        $comment->save();
+
+        return redirect()->back()->with("success", "Comment succesfully edited");
+
+    }
 
     public function delete( Request $request, Comment $comment )
     {
