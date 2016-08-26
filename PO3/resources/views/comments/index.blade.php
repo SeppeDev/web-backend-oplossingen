@@ -253,43 +253,53 @@
 
                                 @endif
 
+                                @if(Auth::guest())
+
+                                    <p>You need to be <a href="{{ url('/login') }}">logged in</a> to comment</p>
+
+                                @endif
+
                             </div>
 
                         </li>
                     </ul>
                 </div>
 
-                <form action="{{ url('comments/add') }}" method="POST" class="form-horizontal">
+                @if (Auth::check())
 
-                    {{ csrf_field() }}
+                    <form action="{{ url('comments/add') }}" method="POST" class="form-horizontal">
 
-                    <div class="form-group">
+                        {{ csrf_field() }}
 
-                        <label for="content" class="col-sm-3 control-label">Comment</label>
+                        <div class="form-group">
 
-                        <div class="col-sm-6">
+                            <label for="content" class="col-sm-3 control-label">Comment</label>
 
-                            <textarea type="text" name="content" id="content" class="form-control"></textarea>
-                        
-                        </div>
+                            <div class="col-sm-6">
 
-                    </div>
-
-                    <input type="hidden" name="article_id" value="{{$article->id}}">
-
-                    <div class="form-group">
-
-                        <div class="col-sm-offset-3 col-sm-6">
-
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa fa-plus"></i> Add Comment
-                            </button>
+                                <textarea type="text" name="content" id="content" class="form-control"></textarea>
+                            
+                            </div>
 
                         </div>
 
-                    </div>
+                        <input type="hidden" name="article_id" value="{{$article->id}}">
 
-                </form>
+                        <div class="form-group">
+
+                            <div class="col-sm-offset-3 col-sm-6">
+
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-plus"></i> Add Comment
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                @endif
 
             </div>
         </div>
